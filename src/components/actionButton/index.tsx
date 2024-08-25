@@ -7,14 +7,16 @@ interface ButtonProps extends TouchableOpacityProps {
   active?: boolean;
 }
 const ActionButton: FC<ButtonProps> = props => {
-  const {title, active} = props;
+  const {title, active, disabled} = props;
   return (
     <TouchableOpacity
       {...props}
       activeOpacity={0.6}
+      disabled={disabled}
       style={[
         styles.container,
         active ? styles.activeButton : styles.defaultButton,
+        disabled && styles.disabledButton,
       ]}>
       <Text
         style={[styles.text, active ? styles.activeText : styles.defaultText]}>

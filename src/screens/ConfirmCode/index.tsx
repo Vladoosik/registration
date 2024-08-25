@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Alert, Pressable, SafeAreaView, Text, View} from 'react-native';
 import {styles} from './styles.ts';
 import CodeInput from '../../components/codeInput';
@@ -8,7 +8,16 @@ const ConfirmCode: FC<any> = props => {
   const {navigation, route} = props;
   const {fetchedCode} = route?.params;
   const [code, setCode] = useState<string>('');
+  const [incorrectCode, setIncorrectCoe] = useState<boolean>(false);
   const incorrectInput = code.length === 6 && code !== fetchedCode;
+
+  useEffect(() => {
+    if (code.length === 6 && incorrectCode){
+      setIncorrectCoe(true)
+    }else {
+      setIncorrectCoe(false)
+    }
+  }, [code]);
 
   const handleSignUp = () => {
     const codeIsMatch = code === fetchedCode;
@@ -26,6 +35,8 @@ const ConfirmCode: FC<any> = props => {
         ],
         {cancelable: false},
       );
+    } else {
+      setIncorrectCoe(true);
     }
   };
 
@@ -38,13 +49,18 @@ const ConfirmCode: FC<any> = props => {
         </Text>
         <Text style={styles.secureCode}>Secure Code</Text>
         <View style={styles.codeInputContainer}>
-          <CodeInput code={code} setCode={setCode} incorrect={incorrectInput} />
+          <CodeInput code={code} setCode={setCode} incorrect={incorrectInput && incorrectCode} />
         </View>
         <Pressable style={styles.resendBtn}>
           <Text style={styles.resendBtnText}>Resend the Code</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-          <ActionButton title={'Sign up'} active onPress={handleSignUp} />
+          <ActionButton
+            disabled={code.length !== 6}
+            title={'Sign up'}
+            active
+            onPress={handleSignUp}
+          />
         </View>
       </View>
     </SafeAreaView>

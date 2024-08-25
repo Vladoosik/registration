@@ -22,8 +22,8 @@ export const style = StyleSheet.create({
   },
   containerAndroid: {
     marginLeft: 4,
-    height: 48,
-    width: 48,
+    height: 64,
+    width: 52,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#cccccc',
@@ -42,8 +42,8 @@ export const style = StyleSheet.create({
   },
   androidIncorrect: {
     marginLeft: 4,
-    height: 48,
-    width: 48,
+    height: 64,
+    width: 52,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'red',

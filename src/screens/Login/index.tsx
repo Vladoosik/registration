@@ -11,6 +11,7 @@ import {styles} from './styles.ts';
 import CustomInput from '../../components/customInput';
 import ActionButton from '../../components/actionButton';
 import {handlePhoneNumberChange} from '../../utils/formatPhoneNumber.ts';
+import {requestUrl} from "../../constants/request.ts";
 
 interface UserType {
   name: string;
@@ -34,7 +35,7 @@ const Login: FC<any> = props => {
     const fetchRegisteredNumbers = async () => {
       try {
         const response = await fetch(
-          'https://demo9298797.mockable.io/registeredUsers',
+          `${requestUrl}/registeredUsers`,
         );
         const data: RegisteredNumber = await response.json();
         setRegisteredUsers(data.registeredNumbers);

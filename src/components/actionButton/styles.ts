@@ -13,6 +13,9 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  disabledButton: {
+    opacity: 0.4,
+  },
   activeButton: {
     backgroundColor: '#30B0C7',
     borderColor: '#30B0C7',

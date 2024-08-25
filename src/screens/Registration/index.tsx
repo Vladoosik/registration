@@ -16,6 +16,7 @@ import {
   formatPhoneNumber,
   handlePhoneNumberChange,
 } from '../../utils/formatPhoneNumber.ts';
+import {requestUrl} from "../../constants/request.ts";
 
 const Register: FC<any> = props => {
   const {navigation} = props;
@@ -44,7 +45,7 @@ const Register: FC<any> = props => {
 
   const checkCode = async () => {
     try {
-      const response = await fetch('https://demo9298797.mockable.io/checkCode');
+      const response = await fetch(`${requestUrl}/checkCode`);
       const data = await response.json();
       return data?.code;
     } catch (e) {
@@ -58,17 +59,12 @@ const Register: FC<any> = props => {
     try {
       const fetchedCode = await checkCode();
       const response = await fetch(
-        'https://demo9298797.mockable.io/registration',
+        `${requestUrl}/registration`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            name: userInfo.name,
-            lastname: userInfo.lastName,
-            number: userInfo.number,
-          }),
         },
       );
 
